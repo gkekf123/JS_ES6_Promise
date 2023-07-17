@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 일반 함수 -> 비동기적 실행이 10초가 걸린다고하면 아무고또 못하쥬(10초 대기)
+      //   function myFetch(url) {
+      //     // 10초 동안 비동기적 실행
+      //     return "혼자 왔니~?";
+      //   }
+
+      //   const result = myFetch("어 아직 싱글이야~~");
+      //   console.log(result);
+
+      /**************************************************************************************/
+
+      /*
+      // promise 반환
+      function myFetch(url) {
+        return new Promise(function (success, fail) {
+          success("혼자왔니??");
+        });
+      }
+      */
+
+      // 결과가 위 문법과 같다
+      // 1. async을 붙이면 자동으로 리턴이 promise로 변환 된다
+      async function myFetch(url) {
+        return "혼자 왔니~?";
+      }
+
+      /* 
+      // 방법 1
+      console.log(1);
+      myFetch("어 아직 싱글이야~").then(function (result) {
+        console.log(result);
+        console.log(2);
+      });
+      console.log(3);
+      */
+
+      // 즉시 실행 함수
+      // 방법 2 - async안에서만 await 키워드 사용 가능
+      // 3. return이 promise라면 await을 붙이고 then 생략 가능
+      (async () => {
+        const result = await myFetch("어 아직 싱글이야~");
+        console.log(result);
+      })();
+    </script>
+  </body>
+</html>
